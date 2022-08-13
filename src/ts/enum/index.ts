@@ -1,3 +1,3 @@
-export enum Pages {
-  Chat ='/chat'
-}
+export { ApiRoutes } from './api-routes';
+
+export { PageRoutes } from './routes';

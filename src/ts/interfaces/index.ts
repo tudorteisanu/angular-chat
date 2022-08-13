@@ -1,24 +1,9 @@
-export interface ChatInterface {
-  id: number;
-  name: string;
-  lastMessage: Message;
-  avatar: Media | null
-}
+export { LoginInterface, CredentialsInterface, TokenInterface } from './auth';
 
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-}
+export { MessageInterface, ChatInterface } from './chat';
 
-export interface Media {
-  id: number;
-  url: string;
-}
+export { MediaInterface } from './media';
 
-export interface Message {
-  id: number;
-  message: string;
-  author: User;
-  createdAt: Date | string | number
-}
+export { UserInterface } from './user';
+
+export { PaginationInterface } from './pagination';

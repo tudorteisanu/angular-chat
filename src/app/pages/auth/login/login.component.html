@@ -1,1 +1,18 @@
-<p>login works!</p>
+<div class="m-auto w-full max-w-sm p-5 shadow-md">
+  <div>
+    <div>Login</div>
+    <input [(ngModel)]="form.email" class="p-2 w-full" type="text" />
+  </div>
+  <div class="mt-2">
+    <div>Password</div>
+    <input [(ngModel)]="form.password" class="p-2 w-full" type="password" />
+  </div>
+  <div class="mt-2">
+    <button
+      class="p-2 cursor-pointer bg-blue-800 text-white w-full"
+      (click)="login()"
+    >
+      Login
+    </button>
+  </div>
+</div>
