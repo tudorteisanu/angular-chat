@@ -1,0 +1,11 @@
+<Content>
+  <div class="w-full">
+    <ChatContent
+      *ngIf="chats.length; else emptyPageContent"
+      [chats]="chats"
+    ></ChatContent>
+    <ng-template #emptyPageContent>
+      <EmptyPage text="There are no chats!"></EmptyPage>
+    </ng-template>
+  </div>
+</Content>
