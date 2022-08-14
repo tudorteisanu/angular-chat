@@ -1,0 +1,1 @@
+export {socketIoConfig} from './socket'
