@@ -15,5 +15,7 @@ export interface MessageInterface {
   id: number;
   message: string;
   author: UserInterface;
-  createdAt: Date | string | number
+  createdAt: Date | string | number;
+  room: Partial<ChatInterface>;
+  attachments: MediaInterface[]
 }

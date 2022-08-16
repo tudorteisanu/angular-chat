@@ -15,7 +15,7 @@ export class ChatMessagesComponent {
   }
 
   get messages(): MessageInterface[] {
-    return this.messagesService.messages;
+    return this.messagesService.getMessagesByRoomId(this.roomId!);
   }
 
   get authUser(): any {

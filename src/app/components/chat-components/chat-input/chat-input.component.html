@@ -1,7 +1,7 @@
 <div class="p-2 fixed sm:relative  sm:bottom-0 shadow-md left-0 w-full flex items-center bg-white rounded-md focus:outline-none focus:border-none focus:ring-none">
   <button
     class="flex items-center rounded-full text-gray-500"
-    [disabled]="!message"
+    [disabled]="!model.message"
   >
     <svg width="25" height="25" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -11,14 +11,14 @@
     </svg>
   </button>
   <textarea
-    [(ngModel)]="message"
+    [(ngModel)]="model.message"
     class=" w-full border border-blue-800 rounded-md mx-2 p-2"
     [rows]="rows"
     (keyup.enter)="sendMessage()"
     (keyup.control.enter)="addRow()"
   > </textarea>
   <button
-    *ngIf="!message;else sendMessageRef"
+    *ngIf="!model.message;else sendMessageRef"
     class="flex items-center rounded-full text-gray-500 w-8"
     (click)="file.click()">
     <svg class="rotate rotate-45" width="20" height="30" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -36,5 +36,5 @@
       </svg>
     </button>
   </ng-template>
-  <input #file type="file" class="hidden">
+  <input #file (change)="onUploadFile($event)" type="file" class="hidden">
 </div>

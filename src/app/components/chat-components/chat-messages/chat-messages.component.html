@@ -6,6 +6,11 @@
       [ngClass]="messageBlockClass(message)"
     >
       <div class="shadow-md rounded-md p-2 w-fit" style="width: fit-content" [ngClass]="messageClass(message)">
+        <div *ngIf="message.attachments.length">
+          <div *ngFor="let file of message.attachments" class="mt-2">
+            <img  [src]="file.url" alt="">
+          </div>
+        </div>
         <div class="break-all">{{message.message}}</div>
         <div
           [ngClass]="dateClass(message)" class="text-xs text-gray-600">{{message.createdAt}}</div>
