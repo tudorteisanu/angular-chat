@@ -8,16 +8,24 @@
       <div>Password</div>
       <input [(ngModel)]="form.password" class="p-2 w-full" type="password" />
     </div>
+    <div class="mt-2">
+      <div>firstName</div>
+      <input [(ngModel)]="form.firstName" class="p-2 w-full" type="text" />
+    </div>
+    <div class="mt-2">
+      <div>lastName</div>
+      <input [(ngModel)]="form.lastName" class="p-2 w-full" type="text" />
+    </div>
     <div class="w-full py-1 text-right">
-      <span class="cursor-pointer" [routerLink]="registerUrl">Register</span>
+      <span class="cursor-pointer" [routerLink]="loginUrl">Login</span>
     </div>
     <div class="mt-2">
       <button
         class="p-2 cursor-pointer bg-blue-800 text-white w-full"
-        (click)="login()"
+        (click)="register()"
       >
-        Login
+        register
       </button>
     </div>
   </div>
-  </div>
+</div>

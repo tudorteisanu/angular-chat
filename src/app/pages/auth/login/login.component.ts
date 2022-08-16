@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../store/auth.service';
 import { LoginInterface } from '../../../../ts/interfaces';
+import {PageRoutes} from "../../../../ts/enum";
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,10 @@ export class LoginComponent {
   };
 
   constructor(private auth: AuthService) {}
+
+  get registerUrl(): string {
+    return PageRoutes.Register
+  }
 
   login(): void {
     this.auth.login(this.form);

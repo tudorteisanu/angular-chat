@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { PageRoutes } from 'src/ts/enum';
 import { MessagesService } from 'src/app/store/messages.service';
 
@@ -10,11 +10,38 @@ import { MessagesService } from 'src/app/store/messages.service';
 export class ChatItemComponent implements OnInit {
   constructor(
     private readonly router: Router,
-    private messagesService: MessagesService
+    private readonly route: ActivatedRoute,
+    private messagesService: MessagesService,
   ) {}
 
   ngOnInit(): void {
-    this.messagesService.fetchMessages()
+    this.messagesService.fetchMessages(this.roomId)
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.scrollToBottom()
+    },20)
+  }
+
+
+  scrollToBottom(): void {
+    const messagesBlock = document.getElementById('messages')!;
+    const {scrollHeight, offsetHeight} = messagesBlock;
+
+    if (scrollHeight !== offsetHeight) {
+      setTimeout(()=> {
+        messagesBlock?.scroll({
+          top: scrollHeight  ,
+          behavior: 'smooth',
+        })
+      }, 100)
+    }
+
+  }
+
+  get roomId(): number {
+    return Number(this.route.snapshot.params['id'])
   }
 
   get chatPageUrl(): string {

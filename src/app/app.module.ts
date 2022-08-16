@@ -8,6 +8,7 @@ import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import { SocketIoModule } from 'ngx-socket-io';
 import { socketIoConfig } from '../config';
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 
 @NgModule({
@@ -22,6 +23,11 @@ import { socketIoConfig } from '../config';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true,
     },
   ],

@@ -1,11 +1,14 @@
 import {UserInterface} from "./user";
 import {MediaInterface} from "./media";
 
-export interface ChatInterface {
-  id: number;
+export interface CreateChatInterface {
   name: string;
+  avatar?: MediaInterface | null
+}
+
+export interface ChatInterface extends CreateChatInterface{
+  id: number;
   lastMessage: MessageInterface;
-  avatar: MediaInterface | null
 }
 
 export interface MessageInterface {

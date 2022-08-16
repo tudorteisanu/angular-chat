@@ -1,17 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { MessageInterface } from 'src/ts/interfaces';
 import { MessagesService } from 'src/app/store/messages.service';
+import {AuthService} from "../../../store/auth.service";
 
 @Component({
   selector: 'ChatMessages',
   templateUrl: './chat-messages.component.html',
 })
-export class ChatMessagesComponent implements OnInit {
-  constructor(private messagesService: MessagesService) {}
+export class ChatMessagesComponent {
+  @Input() roomId: number | undefined;
+
+  constructor(private messagesService: MessagesService, private authService: AuthService) {
+
+  }
 
   get messages(): MessageInterface[] {
     return this.messagesService.messages;
   }
 
-  ngOnInit(): void {}
+  get authUser(): any {
+    return this.authService.credentialsEvent.getValue()?.user
+  }
+
+  isCurrentUser(message: MessageInterface): boolean {
+    return message.author.id === this.authUser.id
+  }
+
+  messageBlockClass(message: any): string{
+    if (this.isCurrentUser(message)) {
+      return 'ml-auto'
+    }
+
+    return ''
+  }
+
+  dateClass(message: any): string{
+    if (this.isCurrentUser(message)) {
+      return 'text-right'
+    }
+    return  ''
+  }
+
+  messageClass(message: any): string {
+    if (this.isCurrentUser(message)) {
+      return 'bg-primary-300'
+    }
+
+    return  'bg-white'
+
+  }
 }
