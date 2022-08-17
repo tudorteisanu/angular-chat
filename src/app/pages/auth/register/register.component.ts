@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {AuthService} from "src/app/store/auth.service";
 import {RegisterInterface} from "src/ts/interfaces/auth";
-import {PageRoutes} from "../../../../ts/enum";
+import {PageRoutes} from "src/ts/enum";
 
 @Component({
   selector: 'app-register',

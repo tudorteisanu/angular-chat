@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { ChatListComponent } from './chat-list/chat-list.component';
-import { ChatItemComponent } from './chat-item/chat-item.component';
-import { ChatComponentsModule } from 'src/app/components/chat-components/chat-components.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {ChatListComponent} from './chat-list/chat-list.component';
+import {ChatItemComponent} from './chat-item/chat-item.component';
+import {ChatComponentsModule} from 'src/app/components/chat-components/chat-components.module';
 import {BaseModule} from "../../components/base/base.module";
-import { CreateChatComponent } from './create-chat/create-chat.component';
+import {CreateChatComponent} from './create-chat/create-chat.component';
 import {FormsModule} from "@angular/forms";
 
 const routes: Routes = [
@@ -27,4 +27,5 @@ const routes: Routes = [
   declarations: [ChatListComponent, ChatItemComponent, CreateChatComponent],
   imports: [CommonModule, RouterModule.forChild(routes), ChatComponentsModule, BaseModule, FormsModule],
 })
-export class ChatModule {}
+export class ChatModule {
+}

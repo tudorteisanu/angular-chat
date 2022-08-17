@@ -9,17 +9,17 @@ import {PageRoutes} from "src/ts/enum";
   templateUrl: './chat-list.component.html',
 })
 export class ChatListComponent implements OnInit {
+  constructor(private chatService: ChatService, private router: Router) {}
+
   get rooms(): ChatInterface[] {
-    return this.chat.rooms
+    return this.chatService.rooms
   }
-  constructor(private chat: ChatService, private router: Router) {}
 
   ngOnInit(): void {
-    this.chat.fetchChats()
+    this.chatService.fetchChats()
   }
 
   async createChat(): Promise<void> {
     await this.router.navigateByUrl(PageRoutes.CreateRoom)
   }
-
 }

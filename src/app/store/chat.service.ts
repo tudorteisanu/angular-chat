@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ChatInterface } from 'src/ts/interfaces';
+import {ChatInterface, PaginationInterface} from 'src/ts/interfaces';
 import {ApiRoutes, PageRoutes} from 'src/ts/enum';
 import {Router} from "@angular/router";
-import {CreateChatInterface} from "../../ts/interfaces/chat";
+import {CreateChatInterface} from "src/ts/interfaces/chat";
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +15,13 @@ export class ChatService {
 
   fetchChats() {
     this.http
-      .get<ChatInterface[]>(ApiRoutes.Rooms)
+      .get<PaginationInterface<ChatInterface>>(ApiRoutes.Rooms)
       .subscribe(
-        (data : ChatInterface[]) => {
-          this.rooms = data;
-          console.log(data)
-        },
-        (error: HttpErrorResponse) => {
-          console.log(error);
+        {
+          next: ({data}: PaginationInterface<ChatInterface>) => {
+            this.rooms = data;
+          },
+          error: (error: HttpErrorResponse) =>  console.log(error)
         }
       );
   }
@@ -30,12 +29,9 @@ export class ChatService {
   createChat(payload: CreateChatInterface) {
     this.http
       .post<void>(ApiRoutes.Rooms, payload)
-      .subscribe(
-        () => {
-          this.router.navigateByUrl(PageRoutes.Chat)
-        },
-        (error: HttpErrorResponse) => {
-          console.log(error);
+      .subscribe({
+        next: () => this.router.navigateByUrl(PageRoutes.Chat),
+        error: (error: HttpErrorResponse) =>  console.log(error)
         }
       );
   }

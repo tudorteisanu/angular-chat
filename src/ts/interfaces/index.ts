@@ -6,6 +6,6 @@ export { MediaInterface } from './media';
 
 export { UserInterface } from './user';
 
-export { PaginationInterface } from './pagination';
+export { PaginationInterface, PaginationMetaInterface} from './pagination';
 
 

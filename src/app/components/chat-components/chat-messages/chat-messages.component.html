@@ -1,5 +1,5 @@
-<div id="messages" class="mt-2 p-2 relative h-full overflow-y-auto" style="height: calc(100vh - 186px);">
-  <div *ngIf="messages.length;else emptyPageContent" class="flex flex-col justify-start w-full pb-4">
+<div id="messages" class="mt-2 p-4 relative h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+  <div *ngIf="messages.length;else emptyPageContent" class="flex flex-col justify-start w-full">
     <div
       *ngFor="let message of messages"
       class="max-w-xs mt-2"

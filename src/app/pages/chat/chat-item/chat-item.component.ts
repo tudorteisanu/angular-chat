@@ -18,28 +18,6 @@ export class ChatItemComponent implements OnInit {
     this.messagesService.fetchMessages(this.roomId)
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.scrollToBottom()
-    },20)
-  }
-
-
-  scrollToBottom(): void {
-    const messagesBlock = document.getElementById('messages')!;
-    const {scrollHeight, offsetHeight} = messagesBlock;
-
-    if (scrollHeight !== offsetHeight) {
-      setTimeout(()=> {
-        messagesBlock?.scroll({
-          top: scrollHeight  ,
-          behavior: 'smooth',
-        })
-      }, 100)
-    }
-
-  }
-
   get roomId(): number {
     return Number(this.route.snapshot.params['id'])
   }

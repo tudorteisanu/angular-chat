@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import { MessageInterface } from 'src/ts/interfaces';
-import { MessagesService } from 'src/app/store/messages.service';
-import {AuthService} from "../../../store/auth.service";
+import {MessageInterface} from 'src/ts/interfaces';
+import {MessagesService} from 'src/app/store/messages.service';
+import {AuthService} from "src/app/store/auth.service";
 
 @Component({
   selector: 'ChatMessages',
@@ -10,9 +10,7 @@ import {AuthService} from "../../../store/auth.service";
 export class ChatMessagesComponent {
   @Input() roomId: number | undefined;
 
-  constructor(private messagesService: MessagesService, private authService: AuthService) {
-
-  }
+  constructor(private messagesService: MessagesService, private authService: AuthService) {  }
 
   get messages(): MessageInterface[] {
     return this.messagesService.getMessagesByRoomId(this.roomId!);
@@ -26,7 +24,7 @@ export class ChatMessagesComponent {
     return message.author.id === this.authUser.id
   }
 
-  messageBlockClass(message: any): string{
+  messageBlockClass(message: MessageInterface): string {
     if (this.isCurrentUser(message)) {
       return 'ml-auto'
     }
@@ -34,19 +32,19 @@ export class ChatMessagesComponent {
     return ''
   }
 
-  dateClass(message: any): string{
+  dateClass(message: MessageInterface): string {
     if (this.isCurrentUser(message)) {
       return 'text-right'
     }
-    return  ''
+    return ''
   }
 
-  messageClass(message: any): string {
+  messageClass(message: MessageInterface): string {
     if (this.isCurrentUser(message)) {
       return 'bg-primary-300'
     }
 
-    return  'bg-white'
+    return 'bg-white'
 
   }
 }

@@ -1,6 +1,12 @@
 export interface PaginationInterface<T> {
   data: T[];
-  currentPage: number;
-  itemsPerPage: number;
-  lastPage: number;
+  meta: PaginationMetaInterface
 }
+
+
+export interface PaginationMetaInterface {
+  itemsPerPage: number;
+  page: number;
+  total: number;
+}
+

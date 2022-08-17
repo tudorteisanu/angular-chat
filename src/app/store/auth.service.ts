@@ -3,8 +3,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CredentialsInterface, LoginInterface } from 'src/ts/interfaces';
 import {ApiRoutes, PageRoutes} from 'src/ts/enum';
 import { BehaviorSubject } from 'rxjs';
-import {RegisterInterface} from "../../ts/interfaces/auth";
+import {RegisterInterface} from "src/ts/interfaces/auth";
 import {Router} from "@angular/router";
+
+const CREDENTIALS_KEY = 'credentials'
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +16,8 @@ export class AuthService {
     new BehaviorSubject<CredentialsInterface | null>(this.defaultCredentials);
 
   get defaultCredentials(): CredentialsInterface | null {
-    if (localStorage.getItem('credentials')) {
-      return JSON.parse(localStorage.getItem('credentials')!)
+    if (localStorage.getItem(CREDENTIALS_KEY)) {
+      return JSON.parse(localStorage.getItem(CREDENTIALS_KEY)!)
     }
     return  null
   }
@@ -24,13 +26,13 @@ export class AuthService {
 
   login(payload: LoginInterface) {
     this.http.post<CredentialsInterface>(ApiRoutes.Login, payload).subscribe(
-      (credentials: CredentialsInterface) => {
-        localStorage.setItem('credentials', JSON.stringify(credentials));
-        this.credentialsEvent.next(credentials);
-        this.router.navigateByUrl(PageRoutes.Chat)
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
+      {
+        next: (credentials: CredentialsInterface) => {
+          localStorage.setItem(CREDENTIALS_KEY, JSON.stringify(credentials));
+          this.credentialsEvent.next(credentials);
+          this.router.navigateByUrl(PageRoutes.Chat)
+        },
+        error: (error: HttpErrorResponse) =>  console.log(error)
       }
     );
   }

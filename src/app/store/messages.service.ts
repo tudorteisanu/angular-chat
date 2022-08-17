@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import {MessageInterface} from "src/ts/interfaces";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {ApiRoutes} from "src/ts/enum";
+import {MessageInterface, PaginationInterface} from "src/ts/interfaces";
+import {HttpClient} from "@angular/common/http";
+import {ApiRoutes, SocketEvents} from "src/ts/enum";
 import {Socket} from "ngx-socket-io";
 import {AuthService} from "./auth.service";
+import {Observable} from "rxjs";
+import {scrollToBottom} from 'src/app/utils'
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ import {AuthService} from "./auth.service";
 export class MessagesService {
   messages: MessageInterface[] = [];
 
-  newMessageEvent = this.socket.fromEvent<string>('addMessage');
+  newMessageEvent: Observable<MessageInterface> = this.socket.fromEvent<MessageInterface>(SocketEvents.AddMessage);
 
   constructor(private http: HttpClient, private socket: Socket, private authService: AuthService) {
     this.subscribeNewMessages()
@@ -27,13 +29,16 @@ export class MessagesService {
     })
   }
 
-  fetchMessages(roomId: number) {
-    this.http.get<MessageInterface[]>(ApiRoutes.Messages, {params: {roomId}}).subscribe(
-      (data: MessageInterface[]) => {
-        this.messages = data;
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
+ fetchMessages(roomId: number) {
+    this.http.get<PaginationInterface<MessageInterface>>(ApiRoutes.Messages, {params: {roomId}})
+      .subscribe({
+        next: ({data}: PaginationInterface<MessageInterface>) => {
+          this.messages = data;
+          scrollToBottom('messages')
+        },
+        error: (error: Error) => {
+          console.log(error)
+        }
       }
     );
   }
@@ -42,29 +47,18 @@ export class MessagesService {
     return this.messages.filter((message: MessageInterface) => message.room.id === roomId)
   }
 
-  subscribeNewMessages() {
-    return this.newMessageEvent.subscribe((data: any)=> {
-      this.messages.push(data)
-      this.scrollToBottom()
-    });
+  subscribeNewMessages(): void {
+    this.newMessageEvent.subscribe(
+      {
+      next: (data: any)=> {
+        this.messages.push(data)
+        scrollToBottom('messages')
+      }
+      }
+      );
   }
 
-  sendMessage(payload: any): void {
-    this.socket.emit('sendMessage', payload)
-  }
-
-  scrollToBottom(): void {
-    const messagesBlock = document.getElementById('messages')!;
-    const {scrollHeight, offsetHeight} = messagesBlock;
-
-    if (scrollHeight !== offsetHeight) {
-      setTimeout(()=> {
-        messagesBlock?.scroll({
-          top: scrollHeight  ,
-          behavior: 'smooth',
-        })
-      }, 100)
-    }
-
+  sendMessage(payload: MessageInterface): void {
+    this.socket.emit(SocketEvents.SendMessage, payload)
   }
 }

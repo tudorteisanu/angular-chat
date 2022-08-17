@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../store/auth.service';
-import { LoginInterface } from '../../../../ts/interfaces';
-import {PageRoutes} from "../../../../ts/enum";
+import { AuthService } from 'src/app/store/auth.service';
+import { LoginInterface } from 'src/ts/interfaces';
+import {PageRoutes} from "src/ts/enum";
 
 @Component({
   selector: 'app-login',
