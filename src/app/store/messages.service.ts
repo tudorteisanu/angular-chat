@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {MessageInterface, PaginationInterface} from "src/ts/interfaces";
 import {HttpClient} from "@angular/common/http";
 import {ApiRoutes, SocketEvents} from "src/ts/enum";
-import {Socket} from "ngx-socket-io";
 import {AuthService} from "./auth.service";
-import {Observable} from "rxjs";
-import {scrollToBottom} from 'src/app/utils'
+import {UtilsService} from "src/app/services/utils.service";
+import {SocketIoService} from "src/app/services/socket.io.service";
+import {ErrorHandlerService} from "../services/error-handler.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +13,21 @@ import {scrollToBottom} from 'src/app/utils'
 export class MessagesService {
   messages: MessageInterface[] = [];
 
-  newMessageEvent: Observable<MessageInterface> = this.socket.fromEvent<MessageInterface>(SocketEvents.AddMessage);
-
-  constructor(private http: HttpClient, private socket: Socket, private authService: AuthService) {
-    this.subscribeNewMessages()
-    this.subscribeTokenChange()
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private utilsService: UtilsService,
+    private injector:Injector,
+    private readonly socketIoService: SocketIoService,
+    private errorHandler: ErrorHandlerService,
+    ) {
+      this.subscribeNewMessage()
   }
 
-  subscribeTokenChange(): void {
-    this.authService.credentialsEvent.subscribe((data: any) => {
-      const {token} = data;
-      this.socket.ioSocket.auth = {
-        token
-      }
+  subscribeNewMessage(): void {
+    this.socketIoService.socket?.on(SocketEvents.AddMessage, (data: MessageInterface) => {
+      this.messages.push(data)
+      this.utilsService.scrollToBottom('messages')
     })
   }
 
@@ -34,10 +36,10 @@ export class MessagesService {
       .subscribe({
         next: ({data}: PaginationInterface<MessageInterface>) => {
           this.messages = data;
-          scrollToBottom('messages')
+          this.utilsService.scrollToBottom('messages')
         },
         error: (error: Error) => {
-          console.log(error)
+          this.errorHandler.handleError(error)
         }
       }
     );
@@ -47,18 +49,7 @@ export class MessagesService {
     return this.messages.filter((message: MessageInterface) => message.room.id === roomId)
   }
 
-  subscribeNewMessages(): void {
-    this.newMessageEvent.subscribe(
-      {
-      next: (data: any)=> {
-        this.messages.push(data)
-        scrollToBottom('messages')
-      }
-      }
-      );
-  }
-
   sendMessage(payload: MessageInterface): void {
-    this.socket.emit(SocketEvents.SendMessage, payload)
+    this.socketIoService.socket?.emit(SocketEvents.SendMessage, payload)
   }
 }

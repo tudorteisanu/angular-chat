@@ -3,7 +3,7 @@ import {MessagesService} from "../../../store/messages.service";
 import {HttpClient} from "@angular/common/http";
 import {ApiRoutes} from "src/ts/enum";
 import {MediaInterface} from "src/ts/interfaces";
-import {scrollToBottom} from "../../../utils";
+import {UtilsService} from "../../../services/utils.service";
 
 @Component({
   selector: 'ChatInput',
@@ -22,6 +22,7 @@ export class ChatInputComponent {
 
   constructor(
     private messagesService: MessagesService,
+    private utilsService: UtilsService,
     private readonly http: HttpClient) { }
 
   sendMessage(): void {
@@ -32,7 +33,7 @@ export class ChatInputComponent {
       }})
     this.resetForm();
     setTimeout(() => {
-      scrollToBottom('messages', 50)
+      this.utilsService.scrollToBottom('messages', 50)
     })
   }
 

@@ -18,7 +18,7 @@ const routes: Routes = [
     component: CreateChatComponent,
   },
   {
-    path: ':id',
+    path: ':id/messages',
     component: ChatItemComponent,
   },
 ];

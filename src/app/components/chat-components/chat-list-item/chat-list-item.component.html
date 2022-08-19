@@ -1,7 +1,7 @@
 <div
   *ngIf="chat"
   class="flex items-center py-2 border-b border-b-gray-200 cursor-pointer hover:bg-gray-100"
-  [routerLink]="[chat.id]"
+  [routerLink]="[chat.id, 'messages']"
 >
   <div class="flex items-center justify-center relative">
     <img
