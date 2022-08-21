@@ -4,4 +4,5 @@ export enum ApiRoutes {
   Rooms = 'rooms',
   Messages = 'messages',
   Upload = 'upload',
+  Users = 'users',
 }

@@ -6,7 +6,7 @@ import {ChatItemComponent} from './chat-item/chat-item.component';
 import {ChatComponentsModule} from 'src/app/components/chat-components/chat-components.module';
 import {BaseModule} from "../../components/base/base.module";
 import {CreateChatComponent} from './create-chat/create-chat.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 const routes: Routes = [
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [ChatListComponent, ChatItemComponent, CreateChatComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), ChatComponentsModule, BaseModule, FormsModule],
+  imports: [CommonModule, RouterModule.forChild(routes), ChatComponentsModule, BaseModule, FormsModule, ReactiveFormsModule],
 })
 export class ChatModule {
 }
