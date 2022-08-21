@@ -4,18 +4,24 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('src/app/layouts/default/default.module').then(m => m.DefaultModule)
+    loadChildren: () =>
+      import('src/app/layouts/default/default.module').then(
+        (m) => m.DefaultModule
+      ),
   },
   {
     path: 'auth',
-    loadChildren: () => import('src/app/layouts/auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () =>
+      import('src/app/layouts/auth/auth.module').then((m) => m.AuthModule),
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabledBlocking',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

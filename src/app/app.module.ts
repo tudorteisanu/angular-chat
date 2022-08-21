@@ -5,9 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
-import {TokenInterceptor} from "./interceptors/token.interceptor";
-import {AuthInterceptor} from "./interceptors/auth.interceptor";
-
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],

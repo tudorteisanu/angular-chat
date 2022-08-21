@@ -1,1 +1,1 @@
-export const USER_ROLE_TYPE = 'asdfasd'
+export const USER_ROLE_TYPE = 'asdfasd';

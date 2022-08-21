@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/store/auth.service';
 import { LoginInterface } from 'src/ts/interfaces';
-import {PageRoutes} from "src/ts/enum";
+import { PageRoutes } from 'src/ts/enum';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent {
   constructor(private auth: AuthService) {}
 
   get registerUrl(): string {
-    return PageRoutes.Register
+    return PageRoutes.Register;
   }
 
   login(): void {

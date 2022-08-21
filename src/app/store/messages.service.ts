@@ -63,4 +63,11 @@ export class MessagesService {
   sendMessage(payload: CreateMessageInterface): void {
     this.socketIoService.socket?.emit(SocketEvents.SendMessage, payload);
   }
+
+  getRoomLastMessageBy(roomId: number): MessageInterface | undefined {
+    const [lastMessage] = this.messages
+      .filter((message: MessageInterface) => message.room.id === roomId)
+      .reverse();
+    return lastMessage;
+  }
 }

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UtilsService {
-  scrollToBottom(nodeId="",timeout=400): void {
+  scrollToBottom(nodeId = '', timeout = 400): void {
     let scrollElement: any;
 
     if (nodeId) {
@@ -13,13 +13,15 @@ export class UtilsService {
       scrollElement = document.body;
     }
 
-    if (!scrollElement ) {
+    if (!scrollElement) {
       return;
     }
 
-    setTimeout(()=> {
-      scrollElement.scroll({top: scrollElement.scrollHeight, behavior: "smooth"});
-    }, timeout)
+    setTimeout(() => {
+      scrollElement.scroll({
+        top: scrollElement.scrollHeight,
+        behavior: 'smooth',
+      });
+    }, timeout);
   }
-
 }

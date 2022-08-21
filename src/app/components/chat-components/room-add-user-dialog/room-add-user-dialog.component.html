@@ -1,28 +1,32 @@
 <Modal [show]="showDialog" (closeDialog)="hideAddUserModal()">
-  <div >
+  <div>
     <div class="relative">
       <div>
-        <input type="text" (input)="searchUser($event)"  class="p-2 border-gray-300 border"  />
+        <input
+          type="text"
+          (input)="searchUser($event)"
+          class="p-2 border-gray-300 border"
+          #searchInput
+        />
       </div>
       <div class="bg-white mt-2">
-        <ul >
-          <ng-container *ngIf="searchUsers.length;">
+        <ul *ngIf="searchUsers.length">
             <li
-              *ngFor="let user of searchUsers;"
-              class="whitespace-nowrap p-2 hover:bg-gray-100 cursor-pointer border-b border-b-gray-200"
+              *ngFor="let user of searchUsers"
+              class="whitespace-nowrap p-2 hover:bg-gray-100 group cursor-pointer border-b border-b-gray-200"
               (click)="addUserToRoom(user.id)"
             >
               <span>
-                {{user.firstName}}
+                {{ user.firstName }}
               </span>
               <span>
-                {{user.lastName}}
+                {{ user.lastName }}
               </span>
-              <span>
-                - {{user.email}}
-              </span>
+              <span> - {{ user.email }} </span>
             </li>
-          </ng-container>
+          <li class="hidden group-focus:visible" *ngIf="!searchUsers.length">
+            no items
+          </li>
         </ul>
       </div>
     </div>

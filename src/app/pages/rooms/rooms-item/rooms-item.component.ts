@@ -34,6 +34,10 @@ export class RoomsItemComponent implements OnInit {
     return Number(this.route.snapshot.params['id']);
   }
 
+  get roomName(): string {
+    return this.room?.name || '';
+  }
+
   fetchRoom(): void {
     this.roomService.fetchRoomById(this.roomId).subscribe({
       next: (room: RoomInterface) => {

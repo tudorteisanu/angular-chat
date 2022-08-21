@@ -1,25 +1,40 @@
 <div
   *ngIf="chat"
-  class="flex items-center py-2 border-b border-b-gray-200 cursor-pointer hover:bg-gray-100"
+  class="flex items-center p-2 border-b border-b-gray-200 cursor-pointer hover:bg-gray-100"
   [routerLink]="[chat.id, 'messages']"
 >
   <div class="flex items-center justify-center relative">
     <img
       class="w-12 h-12 rounded-full"
-      *ngIf="chat.avatar"
+      *ngIf="chat.avatar && chat.avatar.url;else defaultAvatar"
       [src]="chat.avatar.url"
       alt="chat avatar"
       [ngClass]="avatarClass"
       (load)="setLoaded()"
     />
-    <div *ngIf="showAvatarPreloader" class="absolute top-0 left-0 w-12 h-12 rounded-full animate-pulse bg-gray-500"></div>
+    <ng-template #defaultAvatar>
+      <img
+        class="w-12 h-12 rounded-full"
+        [src]="defaultAvatarUrl"
+        alt="chat avatar"
+      />
+    </ng-template>
+    <div
+      *ngIf="showAvatarPreloader"
+      class="absolute top-0 left-0 w-12 h-12 rounded-full animate-pulse bg-gray-500"
+    ></div>
   </div>
-  <div class="ml-3">
+  <div class="ml-3 w-full">
     <div class="text-gray-700 font-bold leading-6">
       {{ chat.name }}
     </div>
-    <div *ngIf="chat.lastMessage" class="text-sm text-gray-500 leading-5">
+    <div *ngIf="chat.lastMessage" class="text-sm text-gray-500 leading-5 flex items-center justify-between w-full">
+      <div>
       {{ chat.lastMessage.message }}
+      </div>
+      <div>
+        {{chat.lastMessage.createdAt | date:'h:mm'}}
+      </div>
     </div>
   </div>
 </div>

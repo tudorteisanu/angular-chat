@@ -22,6 +22,10 @@ export class ChatListItemComponent implements OnInit {
     return !!this.chat?.avatar?.url && !this.avatarLoaded;
   }
 
+  get defaultAvatarUrl(): string {
+    return 'assets/icons/default-avatar.svg';
+  }
+
   setLoaded(): void {
     this.avatarLoaded = true;
   }

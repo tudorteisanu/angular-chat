@@ -1,17 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-base-btn',
   templateUrl: './base-btn.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class BaseBtnComponent implements OnInit {
-  @Input() variant: 'outline' | 'link' = 'outline'
+  @Input() variant: 'outline' | 'link' = 'outline';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

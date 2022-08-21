@@ -5,7 +5,7 @@ export interface LoginInterface {
   password: string;
 }
 
-export interface RegisterInterface extends LoginInterface{
+export interface RegisterInterface extends LoginInterface {
   firstName: string;
   lastName: string;
 }
