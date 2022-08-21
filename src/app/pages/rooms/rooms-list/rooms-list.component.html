@@ -1,7 +1,7 @@
 <Content>
   <div class="w-full">
     <div>
-      <button (click)="createChat()">add chat</button>
+      <button [routerLink]="roomsCreateUrl">add chat</button>
     </div>
     <ChatContent
       *ngIf="rooms.length; else emptyPageContent"

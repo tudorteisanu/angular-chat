@@ -1,29 +1,29 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChatInterface } from 'src/ts/interfaces';
+import { RoomInterface } from 'src/ts/interfaces';
 
 @Component({
   selector: 'ChatListItem',
   templateUrl: './chat-list-item.component.html',
 })
 export class ChatListItemComponent implements OnInit {
-  @Input() chat: ChatInterface | undefined;
+  @Input() chat: RoomInterface | undefined;
   avatarLoaded: boolean = false;
 
   constructor() {}
 
-  get avatarClass(): string  {
+  get avatarClass(): string {
     if (!this.avatarLoaded) {
-      return 'hidden'
+      return 'hidden';
     }
-    return ''
+    return '';
   }
 
   get showAvatarPreloader(): boolean {
-    return !!this.chat?.avatar?.url && !this.avatarLoaded
+    return !!this.chat?.avatar?.url && !this.avatarLoaded;
   }
 
   setLoaded(): void {
-    this.avatarLoaded = true
+    this.avatarLoaded = true;
   }
 
   ngOnInit(): void {}
