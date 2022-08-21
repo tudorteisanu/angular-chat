@@ -1,9 +1,9 @@
-import {Component, Input} from '@angular/core';
-import {MessagesService} from "../../../store/messages.service";
-import {HttpClient} from "@angular/common/http";
-import {ApiRoutes} from "src/ts/enum";
-import {MediaInterface} from "src/ts/interfaces";
-import {UtilsService} from "../../../services/utils.service";
+import { Component, Input } from '@angular/core';
+import { MessagesService } from '@store/messages.service';
+import { HttpClient } from '@angular/common/http';
+import { ApiRoutes } from 'src/ts/enum';
+import { CreateMessageInterface, MediaInterface } from 'src/ts/interfaces';
+import { UtilsService } from '@services/utils.service';
 
 @Component({
   selector: 'ChatInput',
@@ -13,58 +13,61 @@ export class ChatInputComponent {
   @Input() roomId!: number;
   @Input() maxRows: number = 4;
 
-  model: any = {
+  model: Pick<CreateMessageInterface, 'message' | 'attachments'> = {
     message: '',
-    attachments: []
-  }
+    attachments: [],
+  };
 
   rows: number = 1;
 
   constructor(
     private messagesService: MessagesService,
     private utilsService: UtilsService,
-    private readonly http: HttpClient) { }
+    private readonly http: HttpClient
+  ) {}
 
   sendMessage(): void {
     this.messagesService.sendMessage({
       ...this.model,
       room: {
         id: this.roomId,
-      }})
+      },
+    });
     this.resetForm();
     setTimeout(() => {
-      this.utilsService.scrollToBottom('messages', 50)
-    })
+      this.utilsService.scrollToBottom('messages', 50);
+    });
   }
 
   resetForm(): void {
     this.model = {
       message: '',
-      attachments: []
-    }
+      attachments: [],
+    };
     this.rows = 1;
   }
 
   addRow(): void {
     if (this.rows >= this.maxRows) {
-      return
+      return;
     }
-    this.rows++
-    this.model.message += '\n'
+    this.rows++;
+    this.model.message += '\n';
   }
 
   onUploadFile(event: any): void {
-    const [file] = event.target.files
+    const [file] = event.target.files;
     const formData = new FormData();
 
     formData.append('file', file);
-    this.uploadFile((formData))
+    this.uploadFile(formData);
   }
 
   uploadFile(data: FormData): void {
-    this.http.post<MediaInterface>(ApiRoutes.Upload, data)
+    this.http
+      .post<MediaInterface>(ApiRoutes.Upload, data)
       .subscribe((data: MediaInterface) => {
-      this.model.attachments.push(data)
-    })
+        this.model.attachments.push(data);
+      });
   }
 }

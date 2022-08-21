@@ -1,0 +1,10 @@
+
+<div class="w-full flex items-center justify-center z-20 bg-white">
+  <div class="max-w-2xl w-full flex items-center justify-between">
+    <button class="" [routerLink]="roomsPageUrl">
+      <img src="assets/icons/back-button.svg" alt="back button" />
+    </button>
+    <div *ngIf="roomName">{{roomName}}</div>
+    <button (click)="showAddUser()">add user</button>
+  </div>
+</div>

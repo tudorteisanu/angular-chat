@@ -11,11 +11,14 @@ export interface RoomInterface extends CreateRoomInterface {
   lastMessage: MessageInterface;
 }
 
-export interface MessageInterface {
-  id: number;
+export interface CreateMessageInterface {
   message: string;
-  author: UserInterface;
-  createdAt: Date | string | number;
   room: Partial<RoomInterface>;
   attachments: MediaInterface[];
+}
+
+export interface MessageInterface extends CreateMessageInterface {
+  id: number;
+  author: UserInterface;
+  createdAt: Date | string | number;
 }

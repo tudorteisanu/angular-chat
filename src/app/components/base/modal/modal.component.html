@@ -1,0 +1,5 @@
+<div class="fixed top-0 left-0 h-screen w-screen z-30 flex items-center justify-center bg-black bg-opacity-50" *ngIf="show" (click)="emitCloseDialog()">
+  <div class="max-w-2xl shadow-md rounded-md p-2 bg-white min-h-[10rem]" (click)="$event.stopPropagation()">
+    <ng-content></ng-content>
+  </div>
+</div>

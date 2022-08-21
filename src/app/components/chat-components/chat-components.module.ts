@@ -6,11 +6,26 @@ import { RouterModule } from '@angular/router';
 import { ChatMessagesComponent } from './chat-messages/chat-messages.component';
 import { ChatListItemComponent } from './chat-list-item/chat-list-item.component';
 import { ChatInputComponent } from './chat-input/chat-input.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from '@angular/forms';
+import { RoomHeadingComponent } from './room-heading/room-heading.component';
+import { RoomAddUserDialogComponent } from './room-add-user-dialog/room-add-user-dialog.component';
 
 @NgModule({
-  declarations: [ChatContentComponent, ChatMessagesComponent, ChatListItemComponent, ChatInputComponent],
+  declarations: [
+    ChatContentComponent,
+    ChatMessagesComponent,
+    ChatListItemComponent,
+    ChatInputComponent,
+    RoomHeadingComponent,
+    RoomAddUserDialogComponent,
+  ],
   imports: [CommonModule, BaseModule, RouterModule, FormsModule],
-  exports: [ChatContentComponent, ChatMessagesComponent, ChatInputComponent],
+  exports: [
+    ChatContentComponent,
+    ChatMessagesComponent,
+    ChatInputComponent,
+    RoomHeadingComponent,
+    RoomAddUserDialogComponent,
+  ],
 })
 export class ChatComponentsModule {}

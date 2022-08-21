@@ -1,6 +1,11 @@
 export { LoginInterface, CredentialsInterface, TokenInterface } from './auth';
 
-export { MessageInterface, RoomInterface, CreateRoomInterface } from './room';
+export {
+  MessageInterface,
+  RoomInterface,
+  CreateRoomInterface,
+  CreateMessageInterface,
+} from './room';
 
 export { MediaInterface } from './media';
 
