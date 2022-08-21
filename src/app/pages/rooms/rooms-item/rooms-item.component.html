@@ -4,6 +4,37 @@
       <button class="" [routerLink]="roomsPageUrl">
         <img src="assets/icons/back-button.svg" alt="back button" />
       </button>
+      <div *ngIf="room">{{room.name}}</div>
+      <div >
+        <button>add user</button>
+        <div class="border border-gray-500 relative">
+          <input type="text"
+                 (blur)="hideSearchItems()"
+                 (input)="searchUser()"
+                 [formControl]="searchValue" />
+          <div class="absolute right-0 top-10 z-20 bg-white shadow-md" *ngIf="searchValue.dirty">
+            <ul >
+              <ng-container *ngIf="searchUsers.length;">
+                <li
+                  *ngFor="let user of searchUsers;"
+                    class="whitespace-nowrap p-2 hover:bg-gray-100 cursor-pointer border-b border-b-gray-200"
+                  (click)="addUserToRoom(user.id)"
+                >
+              <span>
+                {{user.firstName}}
+              </span>
+                  <span>
+                {{user.lastName}}
+              </span>
+                  <span>
+                - {{user.email}}
+              </span>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="w-full mb-28 sm:mb-0">

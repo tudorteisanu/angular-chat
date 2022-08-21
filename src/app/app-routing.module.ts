@@ -9,11 +9,13 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('src/app/layouts/auth/auth.module').then(m => m.AuthModule)
-  }
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabledBlocking'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

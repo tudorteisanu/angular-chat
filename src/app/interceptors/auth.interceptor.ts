@@ -18,14 +18,11 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          if (error.error instanceof ErrorEvent) {
-            console.log('This is client side error');
-          } else {
             if (error.status === 401) {
               this.router.navigateByUrl(PageRoutes.Login)
             }
-          }
-          return throwError(error.message);
+
+          return throwError(() => new Error(error.message));
         })
       )
   }
