@@ -1,6 +1,10 @@
 <Content>
-  <RoomHeading (showAddUserModal)="showAddUserModal()" [roomName]="roomName"></RoomHeading>
-  <div class="w-full mb-28 sm:mb-0">
+  <RoomHeading
+    [roomId]="roomId"
+    (showAddUserModal)="showAddUserModal()"
+    [roomName]="roomName"
+  ></RoomHeading>
+  <div class="w-full mb-8 sm:mb-0">
     <ChatMessages [roomId]="roomId"></ChatMessages>
     <ChatInput [roomId]="roomId"></ChatInput>
   </div>

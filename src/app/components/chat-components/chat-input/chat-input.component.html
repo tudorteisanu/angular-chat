@@ -1,11 +1,11 @@
-<div class="w-full">
+<div class="w-full shadow-md">
   <div class="flex items-center flex-row">
     <div *ngFor="let file of model.attachments">
       <img class="h-20 w-20 m-2" [src]="file.url" alt="" />
     </div>
   </div>
   <div
-    class="p-2 fixed sm:relative sm:bottom-0 shadow-md left-0 w-full flex items-center bg-white rounded-md focus:outline-none focus:border-none focus:ring-none"
+    class="p-2 fixed sm:relative bottom-0 shadow-md left-0 w-full flex items-center bg-white rounded-md focus:outline-none focus:border-none focus:ring-none"
   >
     <button
       class="flex items-center rounded-full text-gray-500"

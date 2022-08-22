@@ -44,7 +44,7 @@ export class ChatMessagesComponent {
 
   messageClass(message: MessageInterface): string {
     if (this.isCurrentUser(message)) {
-      return 'bg-primary-300';
+      return 'bg-green-50';
     }
 
     return 'bg-white';

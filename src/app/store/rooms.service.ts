@@ -5,7 +5,7 @@ import {
   CreateRoomInterface,
   PaginationInterface,
 } from 'src/ts/interfaces';
-import { ApiRoutes, PageRoutes } from 'src/ts/enum';
+import { ApiRoutes } from 'src/ts/enum';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '@services/error-handler.service';
 import { Observable } from 'rxjs';
@@ -40,13 +40,13 @@ export class RoomsService {
     return this.http.get<RoomInterface>(roomByIdUrl);
   }
 
-  createRoom(payload: CreateRoomInterface) {
-    this.http.post<void>(ApiRoutes.Rooms, payload).subscribe({
-      next: () => this.router.navigateByUrl(PageRoutes.Rooms),
-      error: (error: HttpErrorResponse) => {
-        this.errorHandler.handleError(error);
-      },
-    });
+  createRoom(payload: CreateRoomInterface): Observable<any> {
+    return this.http.post<void>(ApiRoutes.Rooms, payload);
+  }
+
+  removeRoom(roomId: number): Observable<void> {
+    const roomByIdUrl = `${ApiRoutes.Rooms}/${roomId}`;
+    return this.http.delete<void>(roomByIdUrl);
   }
 
   addUserToRoom(roomId: number, userId: number): Observable<void> {

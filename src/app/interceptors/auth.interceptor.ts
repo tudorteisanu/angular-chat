@@ -24,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.router.navigateByUrl(PageRoutes.Login);
         }
 
-        return throwError(() => new Error(error.message));
+        return throwError(() => error.error);
       })
     );
   }

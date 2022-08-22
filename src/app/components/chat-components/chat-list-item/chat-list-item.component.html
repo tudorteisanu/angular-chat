@@ -5,6 +5,7 @@
 >
   <div class="flex items-center justify-center relative">
     <img
+      loading="lazy"
       class="w-12 h-12 rounded-full"
       *ngIf="chat.avatar && chat.avatar.url;else defaultAvatar"
       [src]="chat.avatar.url"
