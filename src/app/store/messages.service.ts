@@ -26,6 +26,7 @@ export class MessagesService {
     private errorHandler: ErrorHandlerService
   ) {
     this.subscribeNewMessage();
+    this.subscribeRemoveMessage();
   }
 
   subscribeNewMessage(): void {
@@ -33,6 +34,23 @@ export class MessagesService {
       SocketEvents.AddMessage,
       (data: MessageInterface) => {
         this.messages.push(data);
+        this.utilsService.scrollToBottom('messages');
+      }
+    );
+  }
+
+  subscribeRemoveMessage(): void {
+    this.socketIoService.socket?.on(
+      SocketEvents.DeleteMessage,
+      ({ messageId }: { messageId: number }) => {
+        const messageToRemoveIndex = this.messages.findIndex(
+          (message: MessageInterface) => message.id === messageId
+        );
+
+        if (messageToRemoveIndex !== -1) {
+          this.messages.splice(messageToRemoveIndex, 1);
+        }
+
         this.utilsService.scrollToBottom('messages');
       }
     );
@@ -64,10 +82,7 @@ export class MessagesService {
     this.socketIoService.socket?.emit(SocketEvents.SendMessage, payload);
   }
 
-  getRoomLastMessageBy(roomId: number): MessageInterface | undefined {
-    const [lastMessage] = this.messages
-      .filter((message: MessageInterface) => message.room.id === roomId)
-      .reverse();
-    return lastMessage;
+  removeMessage(messageId: number): void {
+    this.socketIoService.socket?.emit(SocketEvents.DeleteMessage, messageId);
   }
 }

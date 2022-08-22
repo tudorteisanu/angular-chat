@@ -49,4 +49,8 @@ export class ChatMessagesComponent {
 
     return 'bg-white';
   }
+
+  removeMessage(messageId: number): void {
+    this.messagesService.removeMessage(messageId);
+  }
 }

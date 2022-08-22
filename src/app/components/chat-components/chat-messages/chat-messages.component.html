@@ -21,7 +21,7 @@
             <img [src]="file.url" alt="" />
           </div>
         </div>
-        <div class="break-all">{{ message.message }}</div>
+        <div class="break-all">{{ message.message }} <span class="text-red-500" (click)="removeMessage(message.id)">x</span></div>
         <div [ngClass]="dateClass(message)" class="text-xs text-gray-600">
           {{ message.createdAt | date:'dd.MM.YYYY h:mm'}}
         </div>
