@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: 'codedeploy/Dockerfile'
+    ports:
+      - '80:80'
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
