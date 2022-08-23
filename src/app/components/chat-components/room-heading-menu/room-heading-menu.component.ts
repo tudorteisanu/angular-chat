@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RoomsService } from '@store/rooms.service';
 import { Router } from '@angular/router';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'RoomHeadingMenu',
@@ -32,11 +33,13 @@ export class RoomHeadingMenuComponent implements OnInit {
     });
   }
 
-  showMenu(): void {
-    this.menu = true;
+  toggleMenu(): void {
+    this.menu = !this.menu;
   }
 
   hideMenu(): void {
-    this.menu = false;
+    timer(50).subscribe(() => {
+      this.menu = false;
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessagesService } from 'src/app/store/messages.service';
-import { RoomInterface, UserInterface } from 'src/ts/interfaces';
+import { RoomInterface } from 'src/ts/interfaces';
 import { RoomsService } from 'src/app/store/rooms.service';
 import { UserService } from 'src/app/store/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -12,7 +12,6 @@ import { ErrorHandlerService } from '@/app/services/error-handler.service';
   templateUrl: './rooms-item.component.html',
 })
 export class RoomsItemComponent implements OnInit {
-  searchUsers: UserInterface[] = [];
   room: RoomInterface | undefined;
   isShowAddUserModal: boolean = false;
 
