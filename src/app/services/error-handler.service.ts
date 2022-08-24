@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import { AlertService } from '@services/alert.service';
+import { AlertType } from '@/ts/enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ErrorHandlerService {
-  constructor() {}
+  constructor(private readonly alertService: AlertService) {}
 
   handleError(e: any): void {
-    console.log(e);
+    this.alertService.show({ message: e.message, type: AlertType.Error });
   }
 }

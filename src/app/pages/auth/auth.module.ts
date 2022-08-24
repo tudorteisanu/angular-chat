@@ -25,5 +25,6 @@ const routes: Routes = [
     BaseModule,
     FormsModule,
   ],
+  exports: [LoginComponent],
 })
 export class AuthModule {}

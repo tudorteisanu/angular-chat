@@ -3,6 +3,8 @@ import { RoomsService } from '@store/rooms.service';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 
+const HIDE_MENU_TIMEOUT = 200;
+
 @Component({
   selector: 'RoomHeadingMenu',
   templateUrl: './room-heading-menu.component.html',
@@ -21,8 +23,8 @@ export class RoomHeadingMenuComponent implements OnInit {
   ngOnInit(): void {}
 
   showAddUser() {
-    this.hideMenu();
     this.showAddUserModal.emit();
+    this.hideMenu();
   }
 
   removeRoom(): void {
@@ -38,7 +40,7 @@ export class RoomHeadingMenuComponent implements OnInit {
   }
 
   hideMenu(): void {
-    timer(50).subscribe(() => {
+    timer(HIDE_MENU_TIMEOUT).subscribe(() => {
       this.menu = false;
     });
   }

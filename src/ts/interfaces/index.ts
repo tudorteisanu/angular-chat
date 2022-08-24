@@ -12,3 +12,5 @@ export { MediaInterface } from './media';
 export { UserInterface } from './user';
 
 export { PaginationInterface, PaginationMetaInterface } from './pagination';
+
+export { AlertInterface } from './alert';

@@ -1,1 +1,1 @@
-export const USER_ROLE_TYPE = 'asdfasd';
+export { MAX_SHOWED_ALERTS, REMOVE_ALERT_TIMEOUT } from './alert';

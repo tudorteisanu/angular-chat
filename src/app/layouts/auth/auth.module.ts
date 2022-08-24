@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
 import { RouterModule, Routes } from '@angular/router';
+import { LayoutModule } from '@components/layout/layout.module';
 
 const routes: Routes = [
   {
@@ -19,6 +20,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AuthComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes), LayoutModule],
 })
 export class AuthModule {}
