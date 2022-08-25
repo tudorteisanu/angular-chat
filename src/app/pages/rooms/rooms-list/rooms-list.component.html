@@ -6,10 +6,10 @@
     >
       +
     </button>
-    <ChatContent
+    <RoomContent
       *ngIf="rooms.length; else emptyPageContent"
-      [chats]="rooms"
-    ></ChatContent>
+      [rooms]="rooms"
+    ></RoomContent>
     <ng-template #emptyPageContent>
       <EmptyPage text="There are no chats!"></EmptyPage>
     </ng-template>

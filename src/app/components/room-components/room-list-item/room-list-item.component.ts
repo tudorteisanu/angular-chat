@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RoomInterface } from 'src/ts/interfaces';
 
 @Component({
-  selector: 'ChatListItem',
-  templateUrl: './chat-list-item.component.html',
+  selector: 'RoomListItem',
+  templateUrl: './room-list-item.component.html',
 })
-export class ChatListItemComponent implements OnInit {
-  @Input() chat: RoomInterface | undefined;
+export class RoomListItemComponent implements OnInit {
+  @Input() room: RoomInterface | undefined;
   avatarLoaded: boolean = false;
 
   constructor() {}
@@ -19,7 +19,7 @@ export class ChatListItemComponent implements OnInit {
   }
 
   get showAvatarPreloader(): boolean {
-    return !!this.chat?.avatar?.url && !this.avatarLoaded;
+    return !!this.room?.avatar?.url && !this.avatarLoaded;
   }
 
   get defaultAvatarUrl(): string {

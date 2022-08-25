@@ -4,10 +4,10 @@ import { MessagesService } from 'src/app/store/messages.service';
 import { AuthService } from 'src/app/store/auth.service';
 
 @Component({
-  selector: 'ChatMessages',
-  templateUrl: './chat-messages.component.html',
+  selector: 'RoomMessages',
+  templateUrl: './room-messages.component.html',
 })
-export class ChatMessagesComponent {
+export class RoomMessagesComponent {
   @Input() roomId: number | undefined;
 
   constructor(
