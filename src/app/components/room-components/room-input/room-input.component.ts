@@ -7,9 +7,9 @@ import { UtilsService } from '@services/utils.service';
 
 @Component({
   selector: 'ChatInput',
-  templateUrl: './chat-input.component.html',
+  templateUrl: './room-input.component.html',
 })
-export class ChatInputComponent {
+export class RoomInputComponent {
   @Input() roomId!: number;
   @Input() maxRows: number = 4;
 

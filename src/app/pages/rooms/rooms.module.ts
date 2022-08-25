@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ChatComponentsModule } from 'src/app/components/chat-components/chat-components.module';
 import { BaseModule } from '@components/base/base.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoomsCreateComponent } from './rooms-create/rooms-create.component';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { RoomsItemComponent } from './rooms-item/rooms-item.component';
+import { RoomComponentsModule } from '@components/room-components/room-components.module';
 
 const routes: Routes = [
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ChatComponentsModule,
+    RoomComponentsModule,
     BaseModule,
     FormsModule,
     ReactiveFormsModule,

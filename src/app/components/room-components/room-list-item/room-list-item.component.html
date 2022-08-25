@@ -1,15 +1,15 @@
 <div
-  *ngIf="chat"
+  *ngIf="room"
   class="flex items-center p-2 border-b border-b-gray-200 cursor-pointer hover:bg-gray-100"
-  [routerLink]="[chat.id, 'messages']"
+  [routerLink]="[room.id, 'messages']"
 >
   <div class="flex items-center justify-center relative">
     <img
       loading="lazy"
       class="w-12 h-12 rounded-full"
-      *ngIf="chat.avatar && chat.avatar.url;else defaultAvatar"
-      [src]="chat.avatar.url"
-      alt="chat avatar"
+      *ngIf="room.avatar && room.avatar.url;else defaultAvatar"
+      [src]="room.avatar.url"
+      alt="room avatar"
       [ngClass]="avatarClass"
       (load)="setLoaded()"
     />
@@ -17,7 +17,7 @@
       <img
         class="w-12 h-12 rounded-full"
         [src]="defaultAvatarUrl"
-        alt="chat avatar"
+        alt="room avatar"
       />
     </ng-template>
     <div
@@ -27,14 +27,14 @@
   </div>
   <div class="ml-3 w-full">
     <div class="text-gray-700 font-bold leading-6">
-      {{ chat.name }}
+      {{ room.name }}
     </div>
-    <div *ngIf="chat.lastMessage" class="text-sm text-gray-500 leading-5 flex items-center justify-between w-full">
+    <div *ngIf="room.lastMessage" class="text-sm text-gray-500 leading-5 flex items-center justify-between w-full">
       <div>
-      {{ chat.lastMessage.message }}
+      {{ room.lastMessage.message }}
       </div>
       <div>
-        {{chat.lastMessage.createdAt | date:'h:mm'}}
+        {{room.lastMessage.createdAt | date:'h:mm'}}
       </div>
     </div>
   </div>
